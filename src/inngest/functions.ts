@@ -1,13 +1,18 @@
 import { inngest } from "./client";
+import { gemini, createAgent } from "@inngest/agent-kit"
 
 export const helloWorld = inngest.createFunction(
   { id: 'hello-world' },
   { event: 'test/hello.world' },
-  async ({ event, step }) => {
-    await step.sleep("generating-plan", "5s")
-    await step.sleep("designing-project-structrue", "3s")
-    await step.sleep("implementing-project", "10s")
-    await step.sleep("testing-project", "2s")
-    return { message: `Hello ${event.data.name}` }
+  async ({ event }) => {
+    const codeAgent = createAgent({
+      model: gemini({ model: "gemini-2.5-flash" }),
+      name: "code-agent",
+      system: "You are an expert next.js developer. You write readable and maintanable code. You write simple next.js and react snippets"
+    })
+
+    const { output } = await codeAgent.run(`Write the following snippet: ${event.data.prompt}`)
+    console.log(output)
+    return { success: "ok" }
   }
 )
