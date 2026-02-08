@@ -9,7 +9,7 @@ import {
   Unauthenticated
 } from "convex/react"
 import { ConvexProviderWithClerk } from "convex/react-clerk"
-import { ClerkProvider, useAuth, UserButton } from "@clerk/nextjs"
+import { ClerkProvider, useAuth } from "@clerk/nextjs"
 import { shadcn } from "@clerk/themes"
 import UnauthenticatedView from "./auth/unauthenticated-view"
 import AuthLoadingView from "./auth/auth-loading-view"
@@ -28,13 +28,7 @@ export function Provider({
     <NextThemesProvider {...props}>
       <ClerkProvider appearance={{ theme: shadcn }}>
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-          <Authenticated>
-            <header className="flex justify-between items-center border-b-2 px-8 py-4">
-              <h1 className="text-2xl font-bold">Vibe</h1>
-              <UserButton />
-            </header>
-            {children}
-          </Authenticated>
+          <Authenticated>{children}</Authenticated>
           <Unauthenticated>
             <UnauthenticatedView />
           </Unauthenticated>

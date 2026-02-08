@@ -8,9 +8,9 @@ import {
   CommandEmpty,
   CommandGroup,
   CommandInput,
+  CommandItem,
   CommandList
 } from "../ui/command"
-import { CommandItem } from "cmdk"
 
 interface ProjectsCommandDialogProps {
   open: boolean
