@@ -29,7 +29,10 @@ export function Provider({
       <ClerkProvider appearance={{ theme: shadcn }}>
         <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
           <Authenticated>
-            <UserButton />
+            <header className="flex justify-between items-center border-b-2 px-8 py-4">
+              <h1 className="text-2xl font-bold">Vibe</h1>
+              <UserButton />
+            </header>
             {children}
           </Authenticated>
           <Unauthenticated>
